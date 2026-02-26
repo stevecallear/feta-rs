@@ -1,0 +1,57 @@
+package feta:wasi;
+
+interface types {
+    variant value {
+        null,
+        integer(s64),
+        float(f64),
+        boolean(bool),
+        %string(string),
+    }
+
+    variant reason {
+        unknown,
+        disabled,
+        %static,
+        split,
+        match,
+        match-split,
+        error,
+    }
+
+    record decision {
+        hash: u32,
+        %variant: string,
+        reason: reason,
+        value: value,
+        audience: option<string>,
+        error: option<string>,
+    }
+}
+
+interface tracking {
+    use types.{reason, value};
+
+    record event {
+        feature-key: string,
+        user-key: string,
+        %variant: string,
+        reason: reason,
+        value: value,
+        audience: option<string>,
+    }
+
+    track-event: func(event: event);
+}
+
+world feta-wasi {
+    use types.{decision, reason, value};
+
+    import tracking;
+
+    export init: func(config-json: string) -> result<_, string>;
+
+    export decide: func(feature-key: string, ctx-json: string) -> decision;
+
+    export decide-all: func(ctx-json: string) -> result<list<tuple<string, decision>>, string>;
+}

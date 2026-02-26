@@ -1,0 +1,23 @@
+[package]
+name = "feta_wasi"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+wit-bindgen-rt = { version = "0.44.0", features = ["bitflags"] }
+feta_core = { package = "feta", path = "../feta" }
+serde_json = "1.0.149"
+wit-bindgen = "0.53.1"
+
+[dev-dependencies]
+feta_integration = { path = "../integration" }
+wasmtime = "41.0.3"
+wasmtime-wasi = "41.0.3"
+
+[lib]
+crate-type = ["cdylib"]
+
+[package.metadata.component]
+package = "feta:wasi"
+
+[package.metadata.component.dependencies]

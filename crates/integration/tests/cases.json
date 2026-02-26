@@ -1,0 +1,138 @@
+{
+    "decide": [
+        {
+            "name": "default static",
+            "feature_key": "bool_feature",
+            "context": {
+                "user_key": "user_key"
+            },
+            "expected": {
+                "variant": "on",
+                "reason": "static",
+                "value": true,
+                "audience": null,
+                "has_error": false
+            }
+        },
+        {
+            "name": "default split",
+            "feature_key": "int_feature",
+            "context": {
+                "user_key": "user_key"
+            },
+            "expected": {
+                "variant": "control",
+                "reason": "split",
+                "value": 1,
+                "audience": null,
+                "has_error": false
+            }
+        },
+        {
+            "name": "audience match",
+            "context": {
+                "user_key": "user_key",
+                "attributes": {
+                    "email": "user@company.com"
+                }
+            },
+            "feature_key": "int_feature",
+            "expected": {
+                "variant": "treatment_b",
+                "reason": "match",
+                "value": 3,
+                "audience": "internal",
+                "has_error": false
+            }
+        },
+        {
+            "name": "audience split",
+            "feature_key": "int_feature",
+            "context": {
+                "user_key": "user_key",
+                "attributes": {
+                    "is_beta": true
+                }
+            },
+            "expected": {
+                "variant": "treatment_a",
+                "reason": "match_split",
+                "value": 2,
+                "audience": "beta",
+                "has_error": false
+            }
+        },
+        {
+            "name": "disabled feature",
+            "feature_key": "disabled_feature",
+            "context": {
+                "user_key": "user_key"
+            },
+            "expected": {
+                "variant": "control",
+                "reason": "disabled",
+                "value": 1.5,
+                "audience": null,
+                "has_error": false
+            }
+        },
+        {
+            "name": "targeting error",
+            "feature_key": "error_feature",
+            "context": {
+                "user_key": "user_key",
+                "attributes": {
+                    "age": 50
+                }
+            },
+            "expected": {
+                "variant": "control",
+                "reason": "error",
+                "value": "off",
+                "audience": null,
+                "has_error": true
+            }
+        }
+    ],
+    "decide_all": [
+        {
+            "name": "decide all",
+            "context": {
+                "user_key": "user_key",
+                "attributes": {
+                    "age": 50
+                }
+            },
+            "expected": {
+                "bool_feature": {
+                    "variant": "on",
+                    "reason": "static",
+                    "value": true,
+                    "audience": null,
+                    "has_error": false
+                },
+                "int_feature": {
+                    "variant": "control",
+                    "reason": "split",
+                    "value": 1,
+                    "audience": null,
+                    "has_error": false
+                },
+                "disabled_feature": {
+                    "variant": "control",
+                    "reason": "disabled",
+                    "value": 1.5,
+                    "audience": null,
+                    "has_error": false
+                },
+                "error_feature": {
+                    "variant": "control",
+                    "reason": "error",
+                    "value": "off",
+                    "audience": null,
+                    "has_error": true
+                }
+            }
+        }
+    ]
+}

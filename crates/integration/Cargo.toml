@@ -1,0 +1,9 @@
+[package]
+name = "feta_integration"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+feta = { path = "../feta" }
+serde = "1.0.228"
+serde_json = "1.0.149"

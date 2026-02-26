@@ -1,0 +1,84 @@
+{
+    "features": {
+        "bool_feature": {
+            "enabled": true,
+            "value_type": "boolean",
+            "variants": {
+                "off": false,
+                "on": true
+            },
+            "default_variant": "off",
+            "default_rule": {
+                "variant": "on"
+            }
+        },
+        "int_feature": {
+            "enabled": true,
+            "value_type": "integer",
+            "variants": {
+                "control": 1,
+                "treatment_a": 2,
+                "treatment_b": 3
+            },
+            "default_variant": "control",
+            "audience_rules": [
+                {
+                    "name": "beta",
+                    "expression": "is_beta",
+                    "distribution": {
+                        "treatment_a": 50,
+                        "treatment_b": 50
+                    }
+                },
+                {
+                    "name": "internal",
+                    "expression": "lower(email) ew \"@company.com\"",
+                    "variant": "treatment_b"
+                }
+            ],
+            "default_rule": {
+                "distribution": {
+                    "control": 90,
+                    "treatment_a": 10
+                }
+            }
+        },
+        "disabled_feature": {
+            "enabled": false,
+            "value_type": "float",
+            "variants": {
+                "control": 1.5,
+                "treatment": 2.5
+            },
+            "default_variant": "control",
+            "default_rule": {
+                "distribution": {
+                    "control": 50,
+                    "treatment": 50
+                }
+            }
+        },
+        "error_feature": {
+            "enabled": true,
+            "value_type": "string",
+            "variants": {
+                "control": "off",
+                "treatment": "on"
+            },
+            "default_variant": "control",
+            "audience_rules": [
+                {
+                    "name": "invalid",
+                    "expression": "lower(age)",
+                    "distribution": {
+                        "control": 50,
+                        "treatment": 50
+                    }
+                }
+            ],
+            "default_rule": {
+                "variant": "control"
+            }
+        }
+    }
+}

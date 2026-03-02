@@ -7,7 +7,6 @@ use crate::{decision::Reason, error::FetaError};
 pub struct RuleBuilder {
     percentages: Vec<(String, u8)>,
     audience: Option<(String, String)>,
-    is_default: bool,
 }
 
 impl Default for RuleBuilder {
@@ -23,7 +22,6 @@ impl RuleBuilder {
         Self {
             percentages: Vec::new(),
             audience: None,
-            is_default: false,
         }
     }
 
@@ -72,12 +70,6 @@ impl RuleBuilder {
         let mut program = None;
         let mut audience = None;
         if let Some((aud, expr)) = self.audience {
-            if self.is_default {
-                return Err(FetaError::Configuration(
-                    "audience not permitted for default rule".to_string(),
-                ));
-            }
-
             audience = Some(aud);
             program = Some(mexl::compile(&expr).map_err(|e| FetaError::Targeting(e.to_string()))?);
 

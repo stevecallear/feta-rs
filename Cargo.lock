@@ -1090,8 +1090,8 @@ dependencies = [
 
 [[package]]
 name = "mexl"
-version = "0.3.0"
-source = "git+https://github.com/stevecallear/mexl-rs#3a96faaa67bfe637025bb367f21b2002f31567e6"
+version = "0.3.1"
+source = "git+https://github.com/stevecallear/mexl-rs#955d27cf628a080e3532ac622152411264e57f9e"
 dependencies = [
  "serde",
  "thiserror 2.0.18",

@@ -3,14 +3,13 @@ use std::collections::HashMap;
 use mexl::Environment;
 
 use crate::{
-    config,
+    RuleBuilder, config,
     context::Context,
     decision::{Decision, DecisionBuilder},
     error::FetaError,
     hash,
     rule::Rule,
     value::{Value, ValueType},
-    RuleBuilder,
 };
 
 /// The builder for constructing a `Feature` instance.
@@ -256,7 +255,7 @@ impl Feature {
 mod tests {
     use std::collections::BTreeMap;
 
-    use crate::{decision::Reason, RuleBuilder};
+    use crate::{RuleBuilder, decision::Reason};
 
     use super::*;
 

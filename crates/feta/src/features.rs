@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 
 use crate::{
-    config,
+    Feature, config,
     context::Context,
     decision::{Decision, DecisionBuilder},
     error::FetaError,
-    hash, Feature,
+    hash,
 };
 
 /// The `Features` struct manages a collection of features.

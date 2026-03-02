@@ -2,12 +2,12 @@ use std::{collections::HashMap, env, path::PathBuf};
 
 use feta_core::config::Config as FetaConfig;
 use wasmtime::{
-    component::{Component, HasSelf, Linker},
     Config, Engine, Store,
+    component::{Component, HasSelf, Linker},
 };
 use wasmtime_wasi::{ResourceTable, WasiCtx, WasiCtxBuilder, WasiCtxView, WasiView};
 
-use crate::host_bindings::{feta::wasi::tracking::Event, Decision, FetaWasi, Reason, Value};
+use crate::host_bindings::{Decision, FetaWasi, Reason, Value, feta::wasi::tracking::Event};
 
 pub mod host_bindings {
     wasmtime::component::bindgen!({

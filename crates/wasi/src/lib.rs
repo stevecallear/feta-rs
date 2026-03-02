@@ -14,7 +14,7 @@ fn get_registry() -> &'static RwLock<Features> {
 }
 
 pub mod bindings {
-    use feta_core::{config::Config, Context, DecisionBuilder, Features, FetaError};
+    use feta_core::{Context, DecisionBuilder, Features, FetaError, config::Config};
 
     wit_bindgen::generate!({
         world: "feta-wasi",
@@ -48,7 +48,7 @@ pub mod bindings {
                 Err(e) => {
                     return DecisionBuilder::new()
                         .error(FetaError::Request(e.to_string()))
-                        .into()
+                        .into();
                 }
             };
 
@@ -57,7 +57,7 @@ pub mod bindings {
                 Err(e) => {
                     return DecisionBuilder::new()
                         .error(FetaError::Request(e.to_string()))
-                        .into()
+                        .into();
                 }
             };
 

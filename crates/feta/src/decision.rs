@@ -2,7 +2,7 @@ use std::fmt;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{error::FetaError, Value};
+use crate::{Value, error::FetaError};
 
 /// The reason for a feature decision.
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]

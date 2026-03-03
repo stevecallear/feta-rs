@@ -133,20 +133,6 @@ impl FeatureBuilder {
     }
 }
 
-/// Creates a default rule from the given configuration.
-fn default_rule_from_config(bucketing: &config::Bucketing) -> Result<Rule, FetaError> {
-    new_rule_builder(bucketing).build()
-}
-
-/// Creates an audience rule from the given configuration.
-fn audience_rule_from_config(
-    audience: &str,
-    bucketing: &config::Bucketing,
-    expr: &str,
-) -> Result<Rule, FetaError> {
-    new_rule_builder(bucketing).audience(audience, expr).build()
-}
-
 /// Creates a `RuleBuilder` from the given bucketing configuration.
 fn new_rule_builder(bucketing: &config::Bucketing) -> RuleBuilder {
     let mut builder = RuleBuilder::new();
@@ -178,18 +164,18 @@ impl Feature {
             .name(name)
             .enabled(cfg.enabled)
             .default_variant(cfg.default_variant.clone())
-            .default_rule(default_rule_from_config(&cfg.default_rule.bucketing)?);
+            .default_rule(new_rule_builder(&cfg.default_rule.bucketing).build()?);
 
         for (variant, value) in &cfg.variants {
             builder = builder.variant(variant, value.clone());
         }
 
         for rule in &cfg.audience_rules {
-            builder = builder.audience_rule(audience_rule_from_config(
-                &rule.name,
-                &rule.bucketing,
-                &rule.expression,
-            )?)
+            builder = builder.audience_rule(
+                new_rule_builder(&rule.bucketing)
+                    .audience(&rule.name, &rule.expression)
+                    .build()?,
+            )
         }
 
         builder.build()

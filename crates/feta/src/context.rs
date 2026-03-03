@@ -11,6 +11,7 @@ pub struct Context {
 }
 
 impl Context {
+    /// Creates a new `Context` with the given user key and no attributes.
     pub fn new(user_key: impl Into<String>) -> Self {
         Self {
             user_key: user_key.into(),

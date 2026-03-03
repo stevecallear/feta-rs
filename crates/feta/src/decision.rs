@@ -18,6 +18,7 @@ pub enum Reason {
 }
 
 impl fmt::Display for Reason {
+    /// Formats the `Reason` as a string for display purposes.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let str = match self {
             Self::Unknown => "unknown",

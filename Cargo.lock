@@ -530,7 +530,7 @@ dependencies = [
 
 [[package]]
 name = "feta"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "mexl",
  "murmur3",
@@ -541,7 +541,7 @@ dependencies = [
 
 [[package]]
 name = "feta_integration"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "feta",
  "serde",
@@ -550,7 +550,7 @@ dependencies = [
 
 [[package]]
 name = "feta_wasi"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "feta",
  "feta_integration",

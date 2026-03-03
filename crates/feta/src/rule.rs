@@ -124,7 +124,7 @@ impl Rule {
         self.buckets
             .iter()
             .find(|b| hash_mod >= b.lower_bound && hash_mod < b.upper_bound)
-            .expect("invalid bucket configuration") // this is unreachable if constructed via builder
+            .unwrap() // this is unreachable if constructed via builder
             .variant
             .clone()
     }
